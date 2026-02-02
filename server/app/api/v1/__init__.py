@@ -1,7 +1,7 @@
 """API v1 Routes Package"""
 
 from fastapi import APIRouter
-from app.api.v1 import auth, security, climate, garden, lighting, camera, activity, dashboard, users
+from app.api.v1 import auth, security, climate, garden, lighting, camera, activity, dashboard, users, websocket
 
 api_router = APIRouter()
 
@@ -15,3 +15,4 @@ api_router.include_router(camera.router, prefix="/cameras", tags=["Cameras"])
 api_router.include_router(activity.router, prefix="/activity", tags=["Activity"])
 api_router.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])
 api_router.include_router(users.router, prefix="/users", tags=["Users"])
+api_router.include_router(websocket.router, tags=["WebSocket"])

@@ -2,7 +2,7 @@
 Camera Routes
 """
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import datetime
@@ -49,7 +49,10 @@ async def get_camera_stream(
     camera = result.scalar_one_or_none()
     
     if not camera:
-        raise Exception("Camera not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Camera not found"}
+        )
     
     return CameraStream(
         camera_id=camera_id,
@@ -69,7 +72,10 @@ async def take_snapshot(
     camera = result.scalar_one_or_none()
     
     if not camera:
-        raise Exception("Camera not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Camera not found"}
+        )
     
     snapshot = CameraSnapshot(
         id=str(uuid.uuid4()),
@@ -101,7 +107,10 @@ async def start_recording(
     camera = result.scalar_one_or_none()
     
     if not camera:
-        raise Exception("Camera not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Camera not found"}
+        )
     
     camera.is_recording = True
     
@@ -137,7 +146,10 @@ async def stop_recording(
     camera = result.scalar_one_or_none()
     
     if not camera:
-        raise Exception("Camera not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Camera not found"}
+        )
     
     camera.is_recording = False
     

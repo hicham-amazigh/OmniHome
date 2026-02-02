@@ -2,7 +2,7 @@
 Activity Log Routes
 """
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from datetime import datetime
@@ -77,7 +77,10 @@ async def get_activity_log(
     log = result.scalar_one_or_none()
     
     if not log:
-        raise Exception("Activity log not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Activity log not found"}
+        )
     
     return ActivityLogResponse(
         id=log.id,

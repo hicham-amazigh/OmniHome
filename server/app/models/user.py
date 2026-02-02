@@ -2,7 +2,7 @@
 User Model
 """
 
-from sqlalchemy import Column, String, Boolean, DateTime
+from sqlalchemy import Column, String, Boolean, DateTime, JSON
 from sqlalchemy.sql import func
 from app.core.database import Base
 
@@ -18,5 +18,6 @@ class User(Base):
     pin_hash = Column(String(255), nullable=False)
     role = Column(String(50), default="user")
     is_active = Column(Boolean, default=True)
+    preferences = Column(JSON, default=lambda: {"theme": "dark", "notifications": True, "biometricEnabled": True})
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

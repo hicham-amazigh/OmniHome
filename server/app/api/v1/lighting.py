@@ -2,7 +2,7 @@
 Lighting Control Routes
 """
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import datetime
@@ -120,9 +120,12 @@ async def control_light(
     light = result.scalar_one_or_none()
     
     if not light:
-        raise Exception("Light not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "NOT_FOUND", "message": "Light not found"}
+        )
     
-    if request.on is not None:
+    if request.on is None:
         request.on = light.on
     if request.brightness is None:
         request.brightness = light.brightness

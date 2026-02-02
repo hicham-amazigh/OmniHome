@@ -61,8 +61,10 @@ async def update_user_profile(
     if request.email:
         user.email = request.email
     if request.preferences:
-        # Store preferences in a separate table or as JSON
-        pass
+        # Update user preferences
+        if user.preferences is None:
+            user.preferences = {}
+        user.preferences.update(request.preferences)
     
     user.updated_at = datetime.utcnow()
     await db.commit()
