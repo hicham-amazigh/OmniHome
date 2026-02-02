@@ -1,0 +1,22 @@
+[Unit]
+Description=OmniHome Frontend Server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/app/OmniHome/client/dist
+ExecStart=/usr/bin/python3 -m http.server 5173
+Restart=always
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/app/OmniHome/client/dist
+
+[Install]
+WantedBy=multi-user.target
