@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=omnihome
+Group=omnihome
 WorkingDirectory=/app/OmniHome/server
 Environment="PATH=/app/OmniHome/server/venv/bin"
 ExecStart=/app/OmniHome/server/venv/bin/python main.py
