@@ -25,7 +25,7 @@ async def lifespan(app: FastAPI):
     """Lifespan context manager for startup and shutdown events."""
     # Startup
     logger.info("Starting OmniHome API Server...")
-    logger.info(f"Database URL: {settings.DATABASE_URL}")
+    logger.info(f"Database URL: {settings.OMNIHOME_DATABASE_URL}")
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     
     # Create database tables

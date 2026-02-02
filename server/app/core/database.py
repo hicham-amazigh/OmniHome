@@ -6,11 +6,13 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.ext.declarative import declarative_base
 from app.core.config import settings
 
-# Create async engine
+# Create async engine with explicit SQLite configuration
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    settings.OMNIHOME_DATABASE_URL,
     echo=settings.DEBUG,
-    future=True
+    future=True,
+    connect_args={"check_same_thread": False},
+    pool_pre_ping=True
 )
 
 # Create async session factory

@@ -4,10 +4,15 @@ Creates the database tables and inserts initial data
 """
 
 import asyncio
+import sys
+import os
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from app.core.config import settings
 from app.core.security import get_password_hash
@@ -21,9 +26,11 @@ from app.models import (
 
 async def init_database():
     """Initialize the database with tables and initial data."""
+
+    print(settings.OMNIHOME_DATABASE_URL)
     
     # Create async engine
-    engine = create_async_engine(settings.DATABASE_URL, echo=True)
+    engine = create_async_engine(settings.OMNIHOME_DATABASE_URL, echo=True)
     
     # Create all tables
     async with engine.begin() as conn:

@@ -21,4 +21,4 @@ class CameraRecording(Base):
     started_at = Column(DateTime(timezone=True), nullable=False, index=True)
     completed_at = Column(DateTime(timezone=True))
     triggered_by = Column(String(50))
-    metadata = Column(JSON)
+    recording_metadata = Column(JSON)

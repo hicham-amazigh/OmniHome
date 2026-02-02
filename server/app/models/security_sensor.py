@@ -19,6 +19,6 @@ class SecuritySensor(Base):
     status = Column(String(50), default="active", index=True)
     last_triggered_at = Column(DateTime(timezone=True))
     last_activity_at = Column(DateTime(timezone=True))
-    metadata = Column(JSON)
+    sensor_metadata = Column(JSON)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

@@ -2,7 +2,7 @@
 Water Tank Model
 """
 
-from sqlalchemy import Column, Integer, Boolean, DateTime
+from sqlalchemy import Column, String, Integer, Boolean, DateTime
 from sqlalchemy.sql import func
 from app.core.database import Base
 

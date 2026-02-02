@@ -4,7 +4,7 @@ from app.schemas.user import (
     UserCreate, UserResponse, UserUpdate, UserLoginPIN, UserLoginBiometric,
     UserChangePIN, UserRegisterBiometric
 )
-from app.schemas.token import Token, TokenRefresh
+from app.schemas.token import Token, TokenRefresh, TokenResponse
 from app.schemas.security import (
     SecurityStatus, SecurityArmRequest, PanicAlertRequest, GarageControlRequest,
     GarageStatus, DoorControlRequest, SecurityAlertResponse
@@ -42,6 +42,7 @@ __all__ = [
     # Token schemas
     "Token",
     "TokenRefresh",
+    "TokenResponse",
     # Security schemas
     "SecurityStatus",
     "SecurityArmRequest",

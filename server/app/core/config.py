@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     ]
     
     # Database Settings
-    DATABASE_URL: str = "sqlite+aiosqlite:///./omnihome.db"
+    OMNIHOME_DATABASE_URL: str = "sqlite+aiosqlite:///./omnihome.db"
     
     # Security Settings
     SECRET_KEY: str = "your-secret-key-change-in-production"
