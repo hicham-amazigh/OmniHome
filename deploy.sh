@@ -70,9 +70,14 @@ echo ""
 
 cd "$DEPLOY_DIR/server"
 
-# Create virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
+# Create virtual environment if it doesn't exist or is incomplete
+if [ ! -d "venv" ] || [ ! -f "venv/bin/activate" ]; then
     echo -e "${YELLOW}Creating Python virtual environment...${NC}"
+    # Remove existing incomplete venv if present
+    if [ -d "venv" ]; then
+        echo -e "${YELLOW}Removing incomplete virtual environment...${NC}"
+        rm -rf venv
+    fi
     python3 -m venv venv
     echo -e "${GREEN}✓ Virtual environment created${NC}"
 else
